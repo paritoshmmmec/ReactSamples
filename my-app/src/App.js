@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ListItem from './ListItem';
+import Welcome from './Welcome';
 
-class App extends Component {
+export default class App extends Component {
+  constructor() {
+    super()
+    this.persons = [{ Id: 1, firstName: "Paritosh" },
+    { Id: 2, firstName: "Service" }];
+  }
+
+  myFunction(x, y, z) {
+    console.log(x);
+    console.log(y);
+    console.log(z);
+  }
+
   render() {
+    var args = [0, 1, 2];
+    this.myFunction.apply(null, args);
+    this.myFunction(...args);
+    var element = this.persons.map((name, index) =>
+      <ListItem key={name.Id} Name={name.firstName} index={index} />
+    );
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Welcome name="paritosh"/>
+        <ul>{element}</ul>
       </div>
     );
   }
-}
 
-export default App;
+}
